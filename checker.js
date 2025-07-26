@@ -9,7 +9,6 @@ jQuery(document).ready(function($){
             return;
         }
 
-        console.log("🔍 Searching:", fullDomain); // Debug log
         $('#bd-domain-result').html('⏳ Checking...');
 
         $.post(bdAjax.ajaxurl, {
@@ -17,14 +16,13 @@ jQuery(document).ready(function($){
             domain: fullDomain,
             security: bdAjax.nonce
         }, function(response){
-            console.log("✅ AJAX Response:", response); // Debug log
             if(response.success){
                 $('#bd-domain-result').html(response.data.message);
             } else {
                 $('#bd-domain-result').html('⚠️ Server returned error');
             }
         }).fail(function(xhr, status, error){
-            console.error("❌ AJAX Error:", status, error); // Debug log
+            console.error("❌ AJAX Error:", status, error);
             $('#bd-domain-result').html('⚠️ AJAX Failed. See console.');
         });
     });
