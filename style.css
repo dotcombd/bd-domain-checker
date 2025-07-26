@@ -1,4 +1,4 @@
-/* ===== Main Wrapper (BTCL Style) ===== */
+/* ===== Wrapper (BTCL Style) ===== */
 .bd-domain-checker-wrapper {
   max-width: 650px;
   margin: 30px auto;
@@ -11,7 +11,6 @@
   text-align: left;
 }
 
-/* Title */
 .bd-domain-title {
   font-size: 20px;
   font-weight: bold;
@@ -28,7 +27,6 @@
   flex-wrap: nowrap;
 }
 
-/* Input field */
 .bd-domain-form input {
   flex: 1;
   padding: 10px;
@@ -37,7 +35,6 @@
   border-radius: 4px;
 }
 
-/* Dropdown */
 .bd-domain-form select {
   min-width: 140px;
   padding: 10px;
@@ -47,7 +44,7 @@
   background: #f9f9f9;
 }
 
-/* Search button (BTCL blue style) */
+/* Search button */
 #bd-domain-submit {
   background: #0066cc;
   color: #fff;
@@ -74,14 +71,23 @@
   text-align: center;
 }
 
-/* Available result - green like BTCL */
-#bd-domain-result span[style*="green"] {
+#bd-domain-result .avail {
   color: #007E33 !important;
 }
-
-/* Not available result - red like BTCL */
-#bd-domain-result span[style*="red"] {
+#bd-domain-result .not-avail {
   color: #CC0000 !important;
+}
+
+/* Other Extensions list */
+.bd-ext-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+  text-align: left;
+}
+.bd-ext-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
 }
 
 /* Welcome text */
@@ -92,7 +98,7 @@
   font-size: 14px;
 }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 600px) {
   .bd-domain-form {
     flex-direction: column;
