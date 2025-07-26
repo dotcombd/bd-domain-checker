@@ -2,10 +2,8 @@
 /**
  * Plugin Name: BD Domain Checker
  * Description: Beautiful AJAX-based .bd and .বাংলা domain availability checker with live result.
- * Version: 3.1
+ * Version: 3.2
  * Author: DOT.COM.BD
- * Author URI: https://github.com/dotcombd
- * License: GPL2
  */
 
 if (!defined('ABSPATH')) exit;
@@ -21,15 +19,17 @@ function bd_domain_checker_assets() {
 }
 add_action('wp_enqueue_scripts', 'bd_domain_checker_assets');
 
-// ✅ AJAX ফাংশন
+// ✅ AJAX হ্যান্ডলার
 function bd_domain_checker_ajax() {
-    check_ajax_referer('bd_checker_nonce', 'security');
-
     if (!isset($_POST['domain'])) {
-        wp_send_json_error('No domain provided');
+        wp_send_json_error(['message' => '❌ No domain received']);
     }
 
-    // ইউজার ইনপুট ডোমেইন
+    // nonce চেক
+    if (!isset($_POST['security']) || !wp_verify_nonce($_POST['security'], 'bd_checker_nonce')) {
+        wp_send_json_error(['message' => '❌ Security check failed']);
+    }
+
     $domain = sanitize_text_field($_POST['domain']);
     $user_input = $domain;
 
@@ -54,20 +54,20 @@ function bd_domain_checker_ajax() {
         ]);
     }
 
-    // DNS চেকের জন্য ডোমেইন পরিষ্কার করা
+    // ডোমেইন পরিষ্কার
     $clean_domain = preg_replace('/^https?:\/\//', '', $domain);
     $clean_domain = preg_replace('/^www\./', '', $clean_domain);
 
-    // ✅ DNS রেকর্ড চেক
+    // DNS চেক
     $has_records = false;
-
-    $records = @dns_get_record($clean_domain, DNS_A + DNS_AAAA + DNS_CNAME);
-    if ($records && count($records) > 0) {
-        $has_records = true;
+    if (function_exists('dns_get_record')) {
+        $records = @dns_get_record($clean_domain, DNS_A + DNS_AAAA + DNS_CNAME);
+        if ($records && count($records) > 0) {
+            $has_records = true;
+        }
     }
-
     if (!$has_records && function_exists('checkdnsrr')) {
-        if (checkdnsrr($clean_domain, "A") || checkdnsrr($clean_domain, "CNAME") || checkdnsrr($clean_domain, "MX")) {
+        if (checkdnsrr($clean_domain, "A") || checkdnsrr($clean_domain, "MX")) {
             $has_records = true;
         }
     }
@@ -93,12 +93,8 @@ function bd_domain_checker_shortcode() {
     
     <div class="bd-domain-checker-wrapper">
         <div class="bd-domain-checker-bg">
+            <h2 class="bd-domain-title">bd domain checker</h2>
             <div class="bd-domain-form">
-                
-                <!-- Title -->
-                <h2 class="bd-domain-title">bd domain checker</h2>
-                
-                <!-- Input + Dropdown -->
                 <div class="bd-domain-input-group">
                     <input type="text" id="bd-domain-input" placeholder="Enter your domain name (without extension)">
                     <select id="bd-domain-ext">
@@ -113,17 +109,9 @@ function bd_domain_checker_shortcode() {
                         <option value=".বাংলা">.বাংলা</option>
                     </select>
                 </div>
-
-                <!-- Search Button -->
-                <div class="bd-domain-button-wrap">
-                    <button id="bd-domain-submit">Search</button>
-                </div>
+                <button id="bd-domain-submit">Search</button>
             </div>
-
-            <!-- Result -->
             <div id="bd-domain-result" class="bd-result-box"></div>
-
-            <!-- Footer Text -->
             <p class="bd-domain-welcome">
                 Welcome to the World of <span class="bangla">.বাংলা</span> & <span class="bd">.bd</span> Domain Service
             </p>
