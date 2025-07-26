@@ -1,29 +1,27 @@
-jQuery(document).ready(function($) {
-    $('#bd-domain-submit').click(function(e) {
-        e.preventDefault();
-        var domain = $('#bd-domain-input').val();
+jQuery(document).ready(function($){
+    $('#bd-domain-submit').on('click', function(){
+        let domainName = $('#bd-domain-input').val().trim();
+        let ext = $('#bd-domain-ext').val();
 
-        if(domain.trim() === '') {
-            alert('Please enter a domain!');
+        if(domainName === ''){
+            $('#bd-domain-result').html('❌ Please enter a domain name');
             return;
         }
 
-        $('#bd-domain-result').html('⏳ Checking...').fadeIn();
+        // বাংলা এক্সটেনশন থাকলে স্পেস সাপোর্ট
+        let fullDomain = domainName + ext;
 
-        $.ajax({
-            url: bdCheckerAjax.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'bd_domain_checker',
-                security: bdCheckerAjax.nonce,
-                domain: domain
-            },
-            success: function(response) {
-                if(response.success) {
-                    $('#bd-domain-result').html(response.data.message).fadeIn();
-                } else {
-                    $('#bd-domain-result').html('❌ Something went wrong!').fadeIn();
-                }
+        $('#bd-domain-result').html('⏳ Checking...');
+
+        $.post(bdCheckerAjax.ajax_url, {
+            action: 'bd_domain_checker',
+            domain: fullDomain,
+            security: bdCheckerAjax.nonce
+        }, function(response){
+            if(response.success){
+                $('#bd-domain-result').html(response.data.message);
+            } else {
+                $('#bd-domain-result').html('⚠️ Something went wrong!');
             }
         });
     });
