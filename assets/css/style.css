@@ -29,12 +29,13 @@
 
 /* Input Field */
 #bd-domain-input {
-    flex: 1 1 250px;
-    max-width: 300px;
+    flex: 1 1 200px;
+    max-width: 260px;
     padding: 10px;
     border: 1px solid #ccc;
     font-size: 16px;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 /* Extension Dropdown */
@@ -43,6 +44,7 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 /* Submit Button */
@@ -55,6 +57,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s ease;
+    box-sizing: border-box;
 }
 
 #bd-domain-submit:hover {
@@ -103,7 +106,7 @@
     color: #721c24;
 }
 
-/* Responsive Design */
+/* ✅ Responsive Design for Mobile */
 @media screen and (max-width: 600px) {
     #bd-domain-form {
         flex-direction: column;
@@ -114,5 +117,7 @@
     #bd-domain-ext,
     #bd-domain-submit {
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 }
