@@ -9,7 +9,6 @@
     margin: 0 auto;
 }
 
-/* Title */
 .bd-domain-title {
     font-size: 24px;
     font-weight: bold;
@@ -21,7 +20,6 @@
     border-radius: 8px;
 }
 
-/* Input + Dropdown Flex */
 .bd-domain-input-group {
     display: flex;
     justify-content: center;
@@ -30,7 +28,6 @@
     flex-wrap: wrap;
 }
 
-/* Input */
 .bd-domain-input-group input {
     width: 200px;
     padding: 12px;
@@ -40,7 +37,6 @@
     outline: none;
 }
 
-/* Dropdown */
 .bd-domain-input-group select {
     padding: 12px;
     border-radius: 6px;
@@ -48,11 +44,6 @@
     font-size: 16px;
     background: #fff;
     color: #333;
-}
-
-/* Button */
-.bd-domain-button-wrap {
-    margin-top: 10px;
 }
 
 #bd-domain-submit {
@@ -65,13 +56,13 @@
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-top: 10px;
 }
 
 #bd-domain-submit:hover {
     background: #005959;
 }
 
-/* Result */
 .bd-result-box {
     margin-top: 15px;
     font-size: 16px;
@@ -83,7 +74,6 @@
     display: inline-block;
 }
 
-/* Footer text */
 .bd-domain-welcome {
     font-size: 16px;
     margin-top: 20px;
@@ -99,7 +89,6 @@
     font-weight: bold;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
     .bd-domain-input-group {
         flex-direction: column;
