@@ -1,8 +1,8 @@
 jQuery(document).ready(function($){
     $('#bd-domain-submit').on('click', function(){
 
-        let domainName = $('#bd-domain-input').val().trim(); // শুধু নাম
-        let ext = $('#bd-domain-ext').val(); // এক্সটেনশন
+        let domainName = $('#bd-domain-input').val().trim(); 
+        let ext = $('#bd-domain-ext').val(); 
 
         if(domainName === ''){
             $('#bd-domain-result').html('❌ Please enter a domain name');
@@ -32,7 +32,7 @@ jQuery(document).ready(function($){
                 }
             },
             error: function(xhr, status, error){
-                console.error("❌ AJAX Error:", status, error); // Debug log
+                console.error("❌ AJAX Error:", status, error); 
                 $('#bd-domain-result').html('⚠️ AJAX request failed. Check console.');
             }
         });
