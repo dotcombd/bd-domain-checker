@@ -1,33 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("domainCheckerForm");
-  const input = document.getElementById("domainInput");
-  const extension = document.getElementById("domainExtension");
-  const result = document.getElementById("resultContainer");
+    const form = document.getElementById("bdDomainCheckerForm");
+    const input = document.getElementById("domainInput");
+    const extension = document.getElementById("domainExtension");
+    const result = document.getElementById("bdResultContainer");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+    if (!form) return;
 
-    const namePart = input.value.trim();
-    const extPart = extension.value;
-    const domain = namePart + extPart; // ইউজার যা লিখেছে + সিলেক্টেড এক্সটেনশন
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    if (!namePart) {
-      result.innerHTML = '<div class="domain-error-msg">⚠️ Please enter a domain name!</div>';
-      return;
-    }
+        const namePart = input.value.trim();
+        const extPart = extension.value;
+        const domain = namePart + extPart;
 
-    fetch("bd-domain-checker.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: "domain=" + encodeURIComponent(domain)
-    })
-    .then(response => response.text())
-    .then(data => {
-      result.innerHTML = data;
-    })
-    .catch(err => {
-      result.innerHTML = '<div class="domain-error-msg">❌ Something went wrong. Try again!</div>';
-      console.error(err);
+        if (!namePart) {
+            result.innerHTML = '<div class="domain-error-msg">⚠️ Please enter a domain name!</div>';
+            return;
+        }
+
+        result.innerHTML = "⏳ Checking...";
+        fetch(bdChecker.ajax_url, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "action=bd_domain_checker&nonce=" + bdChecker.nonce + "&domain=" + encodeURIComponent(domain)
+        })
+        .then(response => response.text())
+        .then(data => {
+            result.innerHTML = data;
+        })
+        .catch(err => {
+            result.innerHTML = '<div class="domain-error-msg">❌ Something went wrong. Try again!</div>';
+            console.error(err);
+        });
     });
-  });
 });
