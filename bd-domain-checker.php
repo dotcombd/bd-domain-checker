@@ -3,7 +3,7 @@
  * Plugin Name: BD Domain Checker
  * Description: Beautiful AJAX-based .bd domain availability checker with live result.
  * Version: 2.0
- * Author: Your Name
+ * Author: DOT.COM.BD
  * License: GPL2
  */
 
