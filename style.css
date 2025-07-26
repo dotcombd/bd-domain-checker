@@ -1,114 +1,105 @@
-/* Wrapper */
+/* ===== Main Wrapper (BTCL Style) ===== */
 .bd-domain-checker-wrapper {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 30px 20px;
-  background: #f9fafc;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  text-align: center;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
 }
 
 /* Title */
 .bd-domain-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  color: #00796b;
-  margin-bottom: 20px;
-  text-transform: capitalize;
-  border-bottom: 2px solid #00796b;
-  display: inline-block;
-  padding-bottom: 8px;
+  color: #003366;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
-/* Form row */
+/* ===== Form Section ===== */
 .bd-domain-form {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  flex-wrap: nowrap;
 }
 
-/* Input */
-.bd-domain-form input[type="text"] {
+/* Input field */
+.bd-domain-form input {
   flex: 1;
-  min-width: 180px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 10px;
   font-size: 16px;
-  outline: none;
-  transition: border-color .3s;
-}
-.bd-domain-form input[type="text"]:focus {
-  border-color: #00796b;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* Dropdown */
 .bd-domain-form select {
-  padding: 12px;
+  min-width: 140px;
+  padding: 10px;
+  font-size: 15px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  background: #fff;
-  cursor: pointer;
-  outline: none;
+  border-radius: 4px;
+  background: #f9f9f9;
 }
 
-/* Button */
+/* Search button (BTCL blue style) */
 #bd-domain-submit {
-  background: #00796b;
+  background: #0066cc;
   color: #fff;
-  padding: 12px 25px;
-  font-size: 16px;
-  font-weight: bold;
   border: none;
-  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background .3s;
+  transition: 0.2s;
 }
 #bd-domain-submit:hover {
-  background: #005a4f;
+  background: #004c99;
 }
 
-/* Result box */
+/* ===== Result box ===== */
 #bd-domain-result {
-  font-size: 18px;
   margin-top: 15px;
+  padding: 10px;
+  font-size: 16px;
   font-weight: bold;
-  padding: 12px;
-  border-radius: 6px;
-  display: inline-block;
-  background: #fff;
-  min-width: 250px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fefefe;
+  text-align: center;
+}
+
+/* Available result - green like BTCL */
+#bd-domain-result span[style*="green"] {
+  color: #007E33 !important;
+}
+
+/* Not available result - red like BTCL */
+#bd-domain-result span[style*="red"] {
+  color: #CC0000 !important;
 }
 
 /* Welcome text */
 .bd-domain-welcome {
-  margin-top: 20px;
-  font-size: 15px;
-  color: #444;
-}
-.bd-domain-welcome .bangla {
-  color: red;
-  font-weight: bold;
-}
-.bd-domain-welcome .bd {
-  color: green;
-  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+  color: #555;
+  font-size: 14px;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
   .bd-domain-form {
     flex-direction: column;
+    align-items: stretch;
   }
-  .bd-domain-form input, 
-  .bd-domain-form select, 
+  .bd-domain-form input,
+  .bd-domain-form select,
   #bd-domain-submit {
     width: 100%;
   }
