@@ -1,26 +1,61 @@
 <?php
 /**
  * Plugin Name: BD Domain Checker
- * Description: Debug test for AJAX.
- * Version: 0.1
+ * Description: Simple BD (.bd & .বাংলা) Domain Availability Checker with AJAX.
+ * Version: 1.0
  * Author: DOT.COM.BD
  */
 
 if (!defined('ABSPATH')) exit;
 
-// AJAX Debug Handler
+/**
+ * AJAX Handler: ডোমেইন অ্যাভেইলেবল কিনা চেক করবে
+ */
 function bd_domain_checker_ajax() {
-    wp_send_json_success(['message' => '✅ AJAX is working!']);
+    if (!isset($_POST['domain'])) {
+        wp_send_json_error(['message' => '❌ No domain received']);
+    }
+
+    $domain = sanitize_text_field($_POST['domain']);
+    $clean_domain = preg_replace('/^https?:\/\//', '', $domain);
+    $clean_domain = preg_replace('/^www\./', '', $clean_domain);
+
+    // DNS চেক
+    $has_records = false;
+    if (function_exists('dns_get_record')) {
+        $records = @dns_get_record($clean_domain, DNS_A + DNS_AAAA + DNS_CNAME);
+        if ($records && count($records) > 0) {
+            $has_records = true;
+        }
+    }
+    if (!$has_records && function_exists('checkdnsrr')) {
+        if (checkdnsrr($clean_domain, "A") || checkdnsrr($clean_domain, "MX")) {
+            $has_records = true;
+        }
+    }
+
+    if ($has_records) {
+        wp_send_json_success([
+            'message' => "❌ Domain <strong>{$domain}</strong> is <span style='color:red;'>NOT available</span>"
+        ]);
+    } else {
+        wp_send_json_success([
+            'message' => "✅ Domain <strong>{$domain}</strong> is <span style='color:green;'>AVAILABLE</span>"
+        ]);
+    }
 }
 add_action('wp_ajax_bd_domain_checker', 'bd_domain_checker_ajax');
 add_action('wp_ajax_nopriv_bd_domain_checker', 'bd_domain_checker_ajax');
 
-// শর্টকোড (আগের মতোই থাকবে)
+/**
+ * শর্টকোড - ফ্রন্টএন্ডে ফর্ম দেখাবে
+ */
 function bd_domain_checker_shortcode() {
     ob_start(); ?>
     
     <div class="bd-domain-checker-wrapper">
         <h2 class="bd-domain-title">BD Domain Checker</h2>
+        
         <div class="bd-domain-form">
             <input type="text" id="bd-domain-input" placeholder="Enter domain name">
             <select id="bd-domain-ext">
@@ -36,15 +71,23 @@ function bd_domain_checker_shortcode() {
             </select>
             <button id="bd-domain-submit">Search</button>
         </div>
+        
         <div id="bd-domain-result"></div>
+        
+        <p class="bd-domain-welcome">
+            Welcome to the World of <span class="bangla">.বাংলা</span> & <span class="bd">.bd</span> Domain Service
+        </p>
     </div>
 
     <?php return ob_get_clean();
 }
 add_shortcode('bd_domain_checker', 'bd_domain_checker_shortcode');
 
-// CSS + JS লোড
+/**
+ * CSS + JS লোড করা
+ */
 function bd_checker_assets() {
+    wp_enqueue_style('bd-checker-style', plugin_dir_url(__FILE__).'style.css');
     wp_enqueue_script('bd-checker-js', plugin_dir_url(__FILE__).'checker.js', ['jquery'], '1.0', true);
     wp_localize_script('bd-checker-js', 'bdAjax', [
         'ajaxurl' => admin_url('admin-ajax.php'),
