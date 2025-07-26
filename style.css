@@ -1,54 +1,88 @@
-.bd-domain-checker-box {
-    max-width: 500px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* Background wrapper */
+.bd-domain-checker-wrapper {
     text-align: center;
-    font-family: Arial, sans-serif;
+    background: url('https://source.unsplash.com/1600x600/?sea,sky') no-repeat center center;
+    background-size: cover;
+    padding: 100px 20px;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
 }
 
-.bd-domain-checker-box h2 {
-    margin-bottom: 15px;
-    font-size: 22px;
+/* Form Container */
+.bd-domain-form {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.bd-domain-input-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Input box */
+.bd-domain-input-group input {
+    width: 250px;
+    padding: 12px;
+    border-radius: 25px;
+    border: 2px solid #fff;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Dropdown */
+.bd-domain-input-group select {
+    padding: 12px;
+    border-radius: 25px;
+    border: 2px solid #fff;
+    font-size: 16px;
+    background: #fff;
     color: #333;
 }
 
-.bd-form-group {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.bd-form-group input {
-    width: 70%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.bd-form-group button {
-    padding: 10px 15px;
-    background: #0073aa;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
+/* Search Button */
+#bd-domain-submit {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 40px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: 2px solid #fff;
+    background: rgba(255,255,255,0.8);
+    color: green;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
-.bd-form-group button:hover {
-    background: #005f87;
+#bd-domain-submit:hover {
+    background: green;
+    color: #fff;
 }
 
+/* Welcome Text */
+.bd-domain-welcome {
+    font-size: 20px;
+    margin-top: 30px;
+    color: #fff;
+}
+
+.bd-domain-welcome .bangla {
+    color: red;
+    font-weight: bold;
+}
+
+.bd-domain-welcome .bd {
+    color: yellow;
+    font-weight: bold;
+}
+
+/* Result Box */
 .bd-result-box {
     margin-top: 20px;
     font-size: 18px;
-    padding: 15px;
-    border-radius: 8px;
-    background: #f9f9f9;
-    display: none;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
 }
