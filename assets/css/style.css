@@ -1,112 +1,111 @@
-/* Plugin Wrapper */
+/* Main plugin wrapper */
 #bd-domain-checker {
     max-width: 800px;
-    margin: 30px auto;
+    margin: 20px auto;
     padding: 20px;
     background: #f9f9f9;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
     border-radius: 8px;
     font-family: "Segoe UI", sans-serif;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 /* Heading */
 #bd-domain-checker h2 {
     text-align: center;
     color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
+    margin-bottom: 16px;
+    font-size: 22px;
 }
 
-/* Form Row */
+/* Form row */
 #bd-domain-form {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-/* Input Field */
+/* Input box */
 #bd-domain-input {
-    flex: 1 1 200px;
-    max-width: 260px;
-    padding: 10px;
+    padding: 8px 10px;
+    font-size: 15px;
     border: 1px solid #ccc;
-    font-size: 16px;
     border-radius: 4px;
+    flex: 1 1 auto;
+    min-width: 180px;
     box-sizing: border-box;
 }
 
-/* Extension Dropdown */
+/* Extension select */
 #bd-domain-ext {
-    padding: 10px;
-    font-size: 16px;
+    padding: 8px;
+    font-size: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-/* Submit Button */
+/* Submit button */
 #bd-domain-submit {
-    padding: 10px 20px;
-    background-color: #0066cc;
+    padding: 8px 14px;
+    font-size: 15px;
+    background-color: #007bff;
     color: white;
-    font-size: 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s ease;
     box-sizing: border-box;
 }
 
 #bd-domain-submit:hover {
-    background-color: #005bb5;
+    background-color: #0056b3;
 }
 
-/* Result Section */
+/* Result message */
 #bd-domain-result {
     text-align: center;
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #222;
+    font-size: 17px;
     font-weight: 500;
+    margin-bottom: 16px;
+    color: #222;
 }
 
-/* Other Extensions Grid */
+/* Grid of extensions */
 .bd-domain-boxes {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
+    gap: 10px;
 }
 
-/* Each Box */
+/* Each extension box */
 .bd-domain-box {
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 14px;
-    min-width: 120px;
+    padding: 8px;
+    min-width: 100px;
     text-align: center;
     border: 2px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Available */
+/* Available domain */
 .bd-domain-box.available {
-    background-color: #e6ffed;
+    background-color: #e6ffe9;
     border-color: #28a745;
     color: #155724;
 }
 
-/* Unavailable */
+/* Not available domain */
 .bd-domain-box.unavailable {
     background-color: #ffecec;
     border-color: #dc3545;
     color: #721c24;
 }
 
-/* ✅ Responsive Design for Mobile */
+/* ✅ Responsive fixes */
 @media screen and (max-width: 600px) {
     #bd-domain-form {
         flex-direction: column;
@@ -118,6 +117,19 @@
     #bd-domain-submit {
         width: 100%;
         max-width: 100%;
-        box-sizing: border-box;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #bd-domain-checker h2 {
+        font-size: 18px;
+    }
+
+    #bd-domain-result {
+        font-size: 16px;
+    }
+
+    .bd-domain-box {
+        min-width: 100%;
     }
 }
