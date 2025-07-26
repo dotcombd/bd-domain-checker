@@ -2,14 +2,15 @@
 /**
  * Plugin Name: BD Domain Checker
  * Description: Beautiful AJAX-based .bd domain availability checker with live result.
- * Version: 2.0
+ * Version: 2.1
  * Author: DOT.COM.BD
+ * Author URI: https://github.com/dotcombd
  * License: GPL2
  */
 
 if (!defined('ABSPATH')) exit;
 
-// Load CSS & JS
+// ✅ CSS & JS লোড করা
 function bd_domain_checker_assets() {
     wp_enqueue_style('bd-domain-checker-css', plugin_dir_url(__FILE__) . 'style.css');
     wp_enqueue_script('bd-domain-checker-js', plugin_dir_url(__FILE__) . 'checker.js', array('jquery'), '1.0', true);
@@ -20,7 +21,7 @@ function bd_domain_checker_assets() {
 }
 add_action('wp_enqueue_scripts', 'bd_domain_checker_assets');
 
-// AJAX handler
+// ✅ AJAX হ্যান্ডলার
 function bd_domain_checker_ajax() {
     check_ajax_referer('bd_checker_nonce', 'security');
 
@@ -28,11 +29,20 @@ function bd_domain_checker_ajax() {
         wp_send_json_error('No domain provided');
     }
 
+    // ইউজার যা লিখেছে তা 그대로 রাখছি
     $domain = sanitize_text_field($_POST['domain']);
-    $allowed_extensions = ['com.bd','net.bd','org.bd','edu.bd','co.bd','mil.bd','gov.bd','ac.bd','info.bd','tv.bd','sw.bd'];
+    $user_input = $domain; 
+
+    // .bd ডোমেইন এক্সটেনশন লিস্ট
+    $allowed_extensions = [
+        'com.bd','net.bd','org.bd','edu.bd','co.bd','mil.bd',
+        'gov.bd','ac.bd','info.bd','tv.bd','sw.bd'
+    ];
+    
+    // ভ্যালিড কিনা চেক
     $valid = false;
     foreach ($allowed_extensions as $ext) {
-        if (str_ends_with($domain, $ext)) {
+        if (str_ends_with(strtolower($domain), $ext)) {
             $valid = true;
             break;
         }
@@ -45,27 +55,29 @@ function bd_domain_checker_ajax() {
         ]);
     }
 
-    $domain = preg_replace('/^https?:\/\//', '', $domain);
-    $domain = preg_replace('/^www\./', '', $domain);
+    // DNS চেকের জন্য ডোমেইন পরিষ্কার করা
+    $clean_domain = preg_replace('/^https?:\/\//', '', $domain);
+    $clean_domain = preg_replace('/^www\./', '', $clean_domain);
 
-    $records = dns_get_record($domain, DNS_ANY);
+    // DNS রেকর্ড চেক
+    $records = dns_get_record($clean_domain, DNS_ANY);
 
     if ($records === false || count($records) === 0) {
         wp_send_json_success([
             'status' => 'available',
-            'message' => "✅ Domain <strong>$domain</strong> is <span style='color:green;'>AVAILABLE</span>"
+            'message' => "✅ Domain <strong>{$user_input}</strong> is <span style='color:green;'>AVAILABLE</span>"
         ]);
     } else {
         wp_send_json_success([
             'status' => 'taken',
-            'message' => "❌ Domain <strong>$domain</strong> is <span style='color:red;'>NOT available</span>"
+            'message' => "❌ Domain <strong>{$user_input}</strong> is <span style='color:red;'>NOT available</span>"
         ]);
     }
 }
 add_action('wp_ajax_bd_domain_checker', 'bd_domain_checker_ajax');
 add_action('wp_ajax_nopriv_bd_domain_checker', 'bd_domain_checker_ajax');
 
-// Shortcode
+// ✅ Shortcode দিয়ে UI রেন্ডার করা
 function bd_domain_checker_shortcode() {
     ob_start(); ?>
     <div class="bd-domain-checker-box">
