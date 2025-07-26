@@ -1,29 +1,33 @@
-jQuery(document).ready(function($){
-    $('#bd-domain-submit').on('click', function(){
-        let domainName = $('#bd-domain-input').val().trim();
-        let ext = $('#bd-domain-ext').val();
-        let fullDomain = domainName + ext;
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("domainCheckerForm");
+  const input = document.getElementById("domainInput");
+  const extension = document.getElementById("domainExtension");
+  const result = document.getElementById("resultContainer");
 
-        if(domainName === ''){
-            $('#bd-domain-result').html('❌ Please enter a domain name');
-            return;
-        }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        $('#bd-domain-result').html('⏳ Checking...');
+    const namePart = input.value.trim();
+    const extPart = extension.value;
+    const domain = namePart + extPart; // ইউজার যা লিখেছে + সিলেক্টেড এক্সটেনশন
 
-        $.post(bdAjax.ajaxurl, {
-            action: 'bd_domain_checker',
-            domain: fullDomain,
-            security: bdAjax.nonce
-        }, function(response){
-            if(response.success){
-                $('#bd-domain-result').html(response.data.message);
-            } else {
-                $('#bd-domain-result').html('⚠️ Server returned error');
-            }
-        }).fail(function(xhr, status, error){
-            console.error("❌ AJAX Error:", status, error);
-            $('#bd-domain-result').html('⚠️ AJAX Failed. See console.');
-        });
+    if (!namePart) {
+      result.innerHTML = '<div class="domain-error-msg">⚠️ Please enter a domain name!</div>';
+      return;
+    }
+
+    fetch("bd-domain-checker.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "domain=" + encodeURIComponent(domain)
+    })
+    .then(response => response.text())
+    .then(data => {
+      result.innerHTML = data;
+    })
+    .catch(err => {
+      result.innerHTML = '<div class="domain-error-msg">❌ Something went wrong. Try again!</div>';
+      console.error(err);
     });
+  });
 });
