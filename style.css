@@ -1,112 +1,50 @@
-/* ===== Wrapper (BTCL Style) ===== */
-.bd-domain-checker-wrapper {
-  max-width: 650px;
-  margin: 30px auto;
-  padding: 20px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: left;
-}
-
-.bd-domain-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #003366;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-/* ===== Form Section ===== */
-.bd-domain-form {
+/* Domain Input + Select + Button inline */
+.domain-input-group {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: nowrap;
+  gap: 8px;
+  margin-bottom: 15px;
 }
 
-.bd-domain-form input {
+.domain-input-group input,
+.domain-input-group select,
+.domain-input-group button {
+  padding: 12px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Input বড় রাখব */
+.domain-input-group input {
+  flex: 2;
+}
+
+/* Select ছোট */
+.domain-input-group select {
   flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
-.bd-domain-form select {
-  min-width: 140px;
-  padding: 10px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: #f9f9f9;
-}
-
-/* Search button */
-#bd-domain-submit {
-  background: #0066cc;
+/* Button */
+.domain-input-group button {
+  background: #1976d2;
   color: #fff;
+  font-weight: 600;
   border: none;
-  padding: 10px 20px;
-  font-size: 15px;
-  border-radius: 4px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
 }
-#bd-domain-submit:hover {
-  background: #004c99;
-}
-
-/* ===== Result box ===== */
-#bd-domain-result {
-  margin-top: 15px;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: #fefefe;
-  text-align: center;
+.domain-input-group button:hover {
+  background: #0d47a1;
 }
 
-#bd-domain-result .avail {
-  color: #007E33 !important;
-}
-#bd-domain-result .not-avail {
-  color: #CC0000 !important;
-}
-
-/* Other Extensions list */
-.bd-ext-list {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 10px;
-  text-align: left;
-}
-.bd-ext-list li {
-  padding: 6px 0;
-  border-bottom: 1px solid #eee;
-}
-
-/* Welcome text */
-.bd-domain-welcome {
-  margin-top: 10px;
-  text-align: center;
-  color: #555;
-  font-size: 14px;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .bd-domain-form {
+/* মোবাইলেও ঠিক থাকবে */
+@media(max-width: 600px){
+  .domain-input-group {
     flex-direction: column;
-    align-items: stretch;
   }
-  .bd-domain-form input,
-  .bd-domain-form select,
-  #bd-domain-submit {
+  .domain-input-group select,
+  .domain-input-group input,
+  .domain-input-group button {
     width: 100%;
   }
 }
