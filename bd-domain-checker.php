@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BD Domain Checker
  * Description: Beautiful AJAX-based .bd and .বাংলা domain availability checker with live result.
- * Version: 3.2
+ * Version: 3.3
  * Author: DOT.COM.BD
  */
 
@@ -21,13 +21,15 @@ add_action('wp_enqueue_scripts', 'bd_domain_checker_assets');
 
 // ✅ AJAX হ্যান্ডলার
 function bd_domain_checker_ajax() {
-    if (!isset($_POST['domain'])) {
-        wp_send_json_error(['message' => '❌ No domain received']);
-    }
 
-    // nonce চেক
+    // Security check
     if (!isset($_POST['security']) || !wp_verify_nonce($_POST['security'], 'bd_checker_nonce')) {
         wp_send_json_error(['message' => '❌ Security check failed']);
+    }
+
+    // Domain পেলাম কিনা
+    if (!isset($_POST['domain'])) {
+        wp_send_json_error(['message' => '❌ No domain received']);
     }
 
     $domain = sanitize_text_field($_POST['domain']);
