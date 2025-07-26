@@ -1,108 +1,118 @@
-/* ===== BD Domain Checker Style ===== */
-
+/* Plugin Wrapper */
 #bd-domain-checker {
     max-width: 800px;
     margin: 30px auto;
-    background: #fdfdfd;
-    border: 1px solid #ddd;
     padding: 20px;
-    font-family: 'SolaimanLipi', 'Arial', sans-serif;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-family: "Segoe UI", sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
+/* Heading */
 #bd-domain-checker h2 {
     text-align: center;
-    font-size: 22px;
+    color: #333;
     margin-bottom: 20px;
-    color: #005f8d;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+    font-size: 24px;
 }
 
+/* Form Row */
 #bd-domain-form {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    align-items: center;
     margin-bottom: 20px;
 }
 
+/* Input Field */
 #bd-domain-input {
     flex: 1 1 250px;
+    max-width: 300px;
     padding: 10px;
     border: 1px solid #ccc;
     font-size: 16px;
+    border-radius: 4px;
 }
 
+/* Extension Dropdown */
 #bd-domain-ext {
     padding: 10px;
-    border: 1px solid #ccc;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
+/* Submit Button */
 #bd-domain-submit {
     padding: 10px 20px;
-    background: #005f8d;
+    background-color: #0066cc;
     color: white;
+    font-size: 16px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s ease;
 }
 
 #bd-domain-submit:hover {
-    background: #007bbd;
+    background-color: #005bb5;
 }
 
 /* Result Section */
 #bd-domain-result {
     text-align: center;
-    font-size: 16px;
-    margin-top: 15px;
-    min-height: 20px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #222;
+    font-weight: 500;
 }
 
-#bd-domain-others {
-    margin-top: 30px;
-}
-
+/* Other Extensions Grid */
 .bd-domain-boxes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
+/* Each Box */
 .bd-domain-box {
     padding: 10px;
-    border-radius: 4px;
-    background: #f4f4f4;
-    text-align: center;
-    font-weight: bold;
-    border: 2px solid transparent;
+    border-radius: 6px;
     font-size: 14px;
-    transition: 0.3s;
+    min-width: 120px;
+    text-align: center;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+/* Available */
 .bd-domain-box.available {
-    background: #e7ffe7;
-    border-color: #00aa00;
-    color: #008800;
+    background-color: #e6ffed;
+    border-color: #28a745;
+    color: #155724;
 }
 
+/* Unavailable */
 .bd-domain-box.unavailable {
-    background: #ffeaea;
-    border-color: #cc0000;
-    color: #aa0000;
+    background-color: #ffecec;
+    border-color: #dc3545;
+    color: #721c24;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+/* Responsive Design */
+@media screen and (max-width: 600px) {
     #bd-domain-form {
         flex-direction: column;
+        align-items: stretch;
     }
 
-    #bd-domain-input, #bd-domain-ext, #bd-domain-submit {
+    #bd-domain-input,
+    #bd-domain-ext,
+    #bd-domain-submit {
         width: 100%;
     }
 }
