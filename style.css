@@ -1,104 +1,115 @@
+/* Wrapper */
 .bd-domain-checker-wrapper {
-    text-align: center;
-    background: #f5f7fa;
-    padding: 50px 20px;
-    font-family: 'Arial', sans-serif;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    max-width: 600px;
-    margin: 0 auto;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px 20px;
+  background: #f9fafc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+/* Title */
 .bd-domain-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #008080;
-    border: 2px solid #008080;
-    display: inline-block;
-    padding: 6px 15px;
-    border-radius: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #00796b;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  border-bottom: 2px solid #00796b;
+  display: inline-block;
+  padding-bottom: 8px;
 }
 
-.bd-domain-input-group {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
+/* Form row */
+.bd-domain-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
-.bd-domain-input-group input {
-    width: 200px;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    outline: none;
+/* Input */
+.bd-domain-form input[type="text"] {
+  flex: 1;
+  min-width: 180px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color .3s;
+}
+.bd-domain-form input[type="text"]:focus {
+  border-color: #00796b;
 }
 
-.bd-domain-input-group select {
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    background: #fff;
-    color: #333;
+/* Dropdown */
+.bd-domain-form select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
 }
 
+/* Button */
 #bd-domain-submit {
-    padding: 12px 40px;
-    font-size: 18px;
-    border-radius: 6px;
-    border: none;
-    background: #008080;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
+  background: #00796b;
+  color: #fff;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .3s;
 }
-
 #bd-domain-submit:hover {
-    background: #005959;
+  background: #005a4f;
 }
 
-.bd-result-box {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    padding: 10px;
-    background: #fff;
-    border-radius: 6px;
-    display: inline-block;
+/* Result box */
+#bd-domain-result {
+  font-size: 18px;
+  margin-top: 15px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 6px;
+  display: inline-block;
+  background: #fff;
+  min-width: 250px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
+/* Welcome text */
 .bd-domain-welcome {
-    font-size: 16px;
-    margin-top: 20px;
-    color: #333;
+  margin-top: 20px;
+  font-size: 15px;
+  color: #444;
 }
-
 .bd-domain-welcome .bangla {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 .bd-domain-welcome .bd {
-    color: green;
-    font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 
+/* Responsive */
 @media (max-width: 480px) {
-    .bd-domain-input-group {
-        flex-direction: column;
-        align-items: center;
-    }
-    .bd-domain-input-group input, 
-    .bd-domain-input-group select {
-        width: 90%;
-    }
-    #bd-domain-submit {
-        width: 95%;
-    }
+  .bd-domain-form {
+    flex-direction: column;
+  }
+  .bd-domain-form input, 
+  .bd-domain-form select, 
+  #bd-domain-submit {
+    width: 100%;
+  }
 }
