@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BD Domain Checker
  * Description: Beautiful AJAX-based .bd domain availability checker with live result.
- * Version: 2.1
+ * Version: 2.2
  * Author: DOT.COM.BD
  * Author URI: https://github.com/dotcombd
  * License: GPL2
@@ -59,18 +59,31 @@ function bd_domain_checker_ajax() {
     $clean_domain = preg_replace('/^https?:\/\//', '', $domain);
     $clean_domain = preg_replace('/^www\./', '', $clean_domain);
 
-    // DNS রেকর্ড চেক
-    $records = dns_get_record($clean_domain, DNS_ANY);
+    // ✅ ডোমেইন রেকর্ড চেক
+    $has_records = false;
 
-    if ($records === false || count($records) === 0) {
-        wp_send_json_success([
-            'status' => 'available',
-            'message' => "✅ Domain <strong>{$user_input}</strong> is <span style='color:green;'>AVAILABLE</span>"
-        ]);
-    } else {
+    // প্রথমে dns_get_record() দিয়ে চেষ্টা
+    $records = @dns_get_record($clean_domain, DNS_A + DNS_AAAA + DNS_CNAME);
+    if ($records && count($records) > 0) {
+        $has_records = true;
+    }
+
+    // fallback: checkdnsrr() দিয়ে চেষ্টা
+    if (!$has_records && function_exists('checkdnsrr')) {
+        if (checkdnsrr($clean_domain, "A") || checkdnsrr($clean_domain, "CNAME") || checkdnsrr($clean_domain, "MX")) {
+            $has_records = true;
+        }
+    }
+
+    if ($has_records) {
         wp_send_json_success([
             'status' => 'taken',
             'message' => "❌ Domain <strong>{$user_input}</strong> is <span style='color:red;'>NOT available</span>"
+        ]);
+    } else {
+        wp_send_json_success([
+            'status' => 'available',
+            'message' => "✅ Domain <strong>{$user_input}</strong> is <span style='color:green;'>AVAILABLE</span>"
         ]);
     }
 }
